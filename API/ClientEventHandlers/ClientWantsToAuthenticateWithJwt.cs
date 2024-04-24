@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Authentication;
+using Api.Models.ServerEvents;
 using Fleck;
+using Infrastructure.Model.ParameterModels;
 using lib;
 
 public class ClientWantsToAuthenticateWithJwtDto : BaseDto
@@ -17,9 +19,7 @@ public class ClientWantsToAuthenticateWithJwt(
     public override async Task Handle(ClientWantsToAuthenticateWithJwtDto dto, IWebSocketConnection socket)
     {
         var claims = tokenService.ValidateJwtAndReturnClaims(dto.jwt!);
-        var user = chatRepository.GetUser(new FindByEmailParams(claims["email"]));
-        if (user.isbanned)
-            throw new AuthenticationException("User is banned");
+        var user = userRepository.GetUser(new FindByEmailParams(claims["email"]));
         WebSocketStateService.GetClient(socket.ConnectionInfo.Id).User = user;
         WebSocketStateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         socket.SendDto(new ServerAuthenticatesUserFromJwt());
