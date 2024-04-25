@@ -1,7 +1,9 @@
+using API.Model.ParameterModels;
 using Dapper;
 using Infrastructure.Model;
-using Infrastructure.Model.ParameterModels;
 using Npgsql;
+
+namespace API.Repositories;
 
 public class UserRepository
 {
@@ -21,20 +23,20 @@ public class UserRepository
         hash as {nameof(EndUser.Hash)},
         salt as {nameof(EndUser.Salt)},
         isadmin as {nameof(EndUser.Isadmin)}
-        from collabapp.enduser where email = @{nameof(FindByEmailParams.email)};";
+        from collabapp.enduser where email = @{nameof(FindByEmailParams.Email)};";
         
 
         using (var conn = _dataSource.OpenConnection())
         {
             return conn.QueryFirstOrDefault<EndUser>(sql, findByEmailParams) ??
-                   throw new KeyNotFoundException("There is no user with email:" + findByEmailParams.email);;
+                   throw new KeyNotFoundException("There is no user with email:" + findByEmailParams.Email);;
         }
     }
     
     public bool DoesUserAlreadyExist(FindByEmailParams findByEmailParams)
     {
-        var sql = $@"
-            SELECT COUNT(*) FROM collabapp.enduser WHERE email = @{nameof(findByEmailParams.email)}";
+        var sql = @$"
+SELECT COUNT(*) FROM collabapp.enduser WHERE email = @{nameof(findByEmailParams.Email)};";
 
         using (var conn = _dataSource.OpenConnection())
         {

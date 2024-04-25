@@ -2,11 +2,17 @@ using Fleck;
 using Infrastructure.Model;
 using lib;
 
-public  class WsWithMetadata(IWebSocketConnection connection)
+public class WsWithMetadata
 {
-    public IWebSocketConnection Connection { get; set; } = connection;
+    public IWebSocketConnection Connection { get; }
     public bool IsAuthenticated { get; set; } = false;
     public EndUser? User { get; set; }
+
+    // Constructor
+    public WsWithMetadata(IWebSocketConnection connection)
+    {
+        Connection = connection;
+    }
 }
 
 public static class WebSocketStateService

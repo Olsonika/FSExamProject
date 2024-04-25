@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Model.ParameterModels;
+﻿namespace API.Model.ParameterModels;
 
 public class InsertUserParams(string email, string hash, string salt)
 {
