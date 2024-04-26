@@ -4,6 +4,7 @@ import {environment} from "./environments/environment";
 import {BaseDto} from "./models/baseDto";
 import { ServerAuthenticatesUser } from "./models/serverAuthenticatesUser";
 import { ServerSendsErrorMessageToClient } from "./models/serverSendErrorMessageToClient";
+import {ServerLogsOutUser} from "./models/serverLogsOutUser";
 import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
@@ -31,6 +32,11 @@ export class WebSocketClientService {
   ServerAuthenticatesUser(dto: ServerAuthenticatesUser) {
     this.router.navigate(['/dashboard']);
     localStorage.setItem("jwt", dto.jwt!);
+  }
+
+  ServerLogsOutUser(dto: ServerLogsOutUser) {
+    this.router.navigate(['/home']);
+    localStorage.clear();
   }
 
   ServerAuthenticatesUserFromJwt(dto: ServerAuthenticatesUser) {

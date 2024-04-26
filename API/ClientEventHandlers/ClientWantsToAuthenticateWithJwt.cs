@@ -3,6 +3,7 @@ using System.Security.Authentication;
 using API.Model.ParameterModels;
 using Api.Models.ServerEvents;
 using API.Repositories;
+using API.Security;
 using Fleck;
 using lib;
 
@@ -11,7 +12,7 @@ public class ClientWantsToAuthenticateWithJwtDto : BaseDto
     [Required] public string? jwt { get; set; }
 }
 
-/*[ValidateDataAnnotations]
+[ValidateDataAnnotations]
 public class ClientWantsToAuthenticateWithJwt(
         UserRepository userRepository,
         TokenService tokenService)
@@ -25,4 +26,4 @@ public class ClientWantsToAuthenticateWithJwt(
         WebSocketStateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         socket.SendDto(new ServerAuthenticatesUserFromJwt());
     }
-}*/
+}

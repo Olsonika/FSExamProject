@@ -1,4 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, inject} from "@angular/core";
+import {WebSocketClientService} from "../../ws.client.service";
+import {ClientWantsToSignIn} from "../../models/clientWantsToSignIn";
+import {ClientWantsToLogOut} from "../../models/clientWantsToLogOut";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +9,10 @@ import {Component} from "@angular/core";
   //styleUrls: ['home.page.scss'],
 })
 export class DashboardPage {
+  constructor() {}
+  ws = inject(WebSocketClientService);
 
+  LogOut() {
+    this.ws.socketConnection.sendDto(new ClientWantsToLogOut());
+  }
 }
