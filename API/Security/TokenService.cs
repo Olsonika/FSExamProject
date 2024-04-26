@@ -6,6 +6,8 @@ using JWT.Serializers;
 using Newtonsoft.Json;
 using Serilog;
 
+namespace API.Security;
+
 public class TokenService
 {
     public string IssueJwt(EndUser user)

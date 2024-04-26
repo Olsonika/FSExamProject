@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -15,7 +14,6 @@ import {ToastModule} from "primeng/toast";
         IonicModule,
         HomePageRoutingModule,
         ReactiveFormsModule,
-        ToastModule
     ],
   declarations: [HomePage]
 })
