@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="form">
+    <form [formGroup]="form">
+      <ion-list>
+        <ion-text *ngIf="email.touched && email.invalid" color="danger">
+          Valid email is required
+        </ion-text>
+        <ion-item>
+          <ion-input type="email" formControlName="email" placeholder="email"></ion-input>
+        </ion-item>
+        <br>
+        <ion-text *ngIf="password.touched && password.invalid" color="danger">
+          Password needs to be minimum 6 characters long
+        </ion-text>
+        <ion-item>
+          <ion-input type="password" formControlName="password" placeholder="password" [counter]="true" minlength="6"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button [disabled]="form.invalid" (click)="SignIn()">Sign in</ion-button>
+      <ion-button [disabled]="form.invalid" (click)="Register()">Register</ion-button>
+    </form>
+  </div>
+</ion-content>

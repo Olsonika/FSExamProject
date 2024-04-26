@@ -7,8 +7,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <input type="email" [formControl]="email" placeholder="email">
-  <input type="password" [formControl]="password" placeholder="password">
-  <button (click)="SignIn()">Sign in</button>
-  <button (click)="Register()">Register</button>
+  <h1>Welcome to CollabApp!</h1>
+  <ion-button routerLink="/login-register">Login or register here!</ion-button>
 </ion-content>
