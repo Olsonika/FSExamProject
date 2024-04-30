@@ -6,13 +6,14 @@ import { ServerAuthenticatesUser } from "./models/serverAuthenticatesUser";
 import { ServerSendsErrorMessageToClient } from "./models/serverSendErrorMessageToClient";
 import {ServerLogsOutUser} from "./models/serverLogsOutUser";
 import {Router} from "@angular/router";
+import {ToastController} from "@ionic/angular";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
 
   public socketConnection: WebsocketSuperclass;
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public toast: ToastController) {
     this.socketConnection = new WebsocketSuperclass(environment.websocketBaseUrl);
     this.handleEventsEmittedByTheServer()
   }
@@ -43,7 +44,18 @@ export class WebSocketClientService {
     //this.messageService.add({life: 2000, summary: 'success', detail: 'Authentication successful!'});
   }
 
-  ServerSendsErrorMessageToClient(dto: ServerSendsErrorMessageToClient) {
-   // this.messageService.add({life: 2000, severity: 'error', summary: '⚠', detail: dto.errorMessage}); //todo implement with err handler
+  async ServerSendsErrorMessageToClient(dto: ServerSendsErrorMessageToClient) {
+
+
+
+
+    console.log(dto.errorMessage);
+    const toast = await this.toast.create({
+      message: dto.errorMessage,
+      color: "danger",
+      duration: 2000,
+      position: "top",
+    });
+    toast.present();
   }
 }

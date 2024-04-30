@@ -23,7 +23,7 @@ public class UserRepository
         hash as {nameof(EndUser.Hash)},
         salt as {nameof(EndUser.Salt)},
         isadmin as {nameof(EndUser.Isadmin)}
-        from collabapp.enduser where email = @{nameof(FindByEmailParams.Email)};";
+        from collabapp.endusers where email = @{nameof(FindByEmailParams.Email)};";
         
 
         using (var conn = _dataSource.OpenConnection())
@@ -36,7 +36,7 @@ public class UserRepository
     public bool DoesUserAlreadyExist(FindByEmailParams findByEmailParams)
     {
         var sql = @$"
-SELECT COUNT(*) FROM collabapp.enduser WHERE email = @{nameof(findByEmailParams.Email)};";
+SELECT COUNT(*) FROM collabapp.endusers WHERE email = @{nameof(findByEmailParams.Email)};";
 
         using (var conn = _dataSource.OpenConnection())
         {
@@ -46,9 +46,8 @@ SELECT COUNT(*) FROM collabapp.enduser WHERE email = @{nameof(findByEmailParams.
     
     public EndUser InsertUser(InsertUserParams insertUserParams)
     {
-
         var sql = $@"
-            INSERT INTO collabapp.enduser (email, hash, salt, isadmin)
+            INSERT INTO collabapp.endusers (email, hash, salt, isadmin)
             VALUES (@{nameof(InsertUserParams.Email)}, @{nameof(InsertUserParams.Hash)}, @{nameof(InsertUserParams.Salt)}, false)
             RETURNING email as {nameof(EndUser.Email)}, 
             isadmin as {nameof(EndUser.Isadmin)},
