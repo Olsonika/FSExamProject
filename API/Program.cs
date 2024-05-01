@@ -33,6 +33,7 @@ public static class Startup
        builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString,
           sourceBuilder => { sourceBuilder.EnableParameterLogging(); });
         builder.Services.AddSingleton<UserRepository>();
+        builder.Services.AddSingleton<ProjectRepository>();
         var services = builder.FindAndInjectClientEventHandlers(Assembly.GetExecutingAssembly());
 
    //     builder.WebHost.UseUrls("http://*:9999");

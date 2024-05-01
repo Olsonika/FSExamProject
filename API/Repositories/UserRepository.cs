@@ -19,7 +19,7 @@ public class UserRepository
         var sql = $@"
         SELECT
         email as {nameof(EndUser.Email)},
-        id as {nameof(EndUser.UserId)},
+        user_id as {nameof(EndUser.UserId)},
         hash as {nameof(EndUser.Hash)},
         salt as {nameof(EndUser.Salt)},
         isadmin as {nameof(EndUser.Isadmin)}
@@ -51,7 +51,7 @@ SELECT COUNT(*) FROM collabapp.endusers WHERE email = @{nameof(findByEmailParams
             VALUES (@{nameof(InsertUserParams.Email)}, @{nameof(InsertUserParams.Hash)}, @{nameof(InsertUserParams.Salt)}, false)
             RETURNING email as {nameof(EndUser.Email)}, 
             isadmin as {nameof(EndUser.Isadmin)},
-            id as {nameof(EndUser.UserId)};";
+            user_id as {nameof(EndUser.UserId)};";
 
         using (var conn = _dataSource.OpenConnection())
         {
