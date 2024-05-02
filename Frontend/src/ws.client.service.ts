@@ -7,6 +7,7 @@ import { ServerSendsErrorMessageToClient } from "./models/serverSendErrorMessage
 import {ServerLogsOutUser} from "./models/serverLogsOutUser";
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
+import {ServerInsertsProject} from "./models/serverInsertsProject";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
@@ -44,11 +45,17 @@ export class WebSocketClientService {
     //this.messageService.add({life: 2000, summary: 'success', detail: 'Authentication successful!'});
   }
 
+  async ServerInsertsProject(dto: ServerInsertsProject) {
+    const toast = await this.toast.create({
+      message: "Project created!",
+      color: "success",
+      duration: 2000,
+      position: "top",
+    });
+    toast.present();
+  }
+
   async ServerSendsErrorMessageToClient(dto: ServerSendsErrorMessageToClient) {
-
-
-
-
     console.log(dto.errorMessage);
     const toast = await this.toast.create({
       message: dto.errorMessage,

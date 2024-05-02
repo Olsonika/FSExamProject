@@ -1,4 +1,5 @@
 ﻿using System.Security.Authentication;
+using API.Model;
 using API.Model.ServerEvents;
 using API.Repositories;
 using Fleck;

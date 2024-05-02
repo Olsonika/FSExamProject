@@ -1,10 +1,16 @@
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input></ion-input>
-      <ion-label>Description</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item>
-  </ion-list>
+
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input formControlName="name" placeholder="Project name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea formControlName="description" placeholder="Description"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button [disabled]="form.invalid" (click)="createProject()">Create project</ion-button>
+  </form>
 </ion-content>

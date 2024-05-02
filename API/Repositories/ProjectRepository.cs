@@ -1,4 +1,5 @@
-﻿using API.Model.ParameterModels;
+﻿using API.Model;
+using API.Model.ParameterModels;
 using Dapper;
 using Infrastructure.Model;
 using Npgsql;

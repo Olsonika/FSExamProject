@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Model;
+﻿namespace API.Model;
 
 public class Project
 {
