@@ -12,6 +12,7 @@ import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProjec
 export class NewProjectComponent {
   constructor(public fb:FormBuilder) {
   }
+
   form = this.fb.group({
     name: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required]),

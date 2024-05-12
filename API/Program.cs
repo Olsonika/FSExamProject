@@ -34,6 +34,7 @@ public static class Startup
           sourceBuilder => { sourceBuilder.EnableParameterLogging(); });
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<ProjectRepository>();
+        builder.Services.AddSingleton<UsersInProjectRepository>();
         var services = builder.FindAndInjectClientEventHandlers(Assembly.GetExecutingAssembly());
 
    //     builder.WebHost.UseUrls("http://*:9999");
