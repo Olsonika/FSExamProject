@@ -1,6 +1,5 @@
 import {Component, inject} from "@angular/core";
 import {WebSocketClientService} from "../../ws.client.service";
-import {ClientWantsToLogOut} from "../../models/clientWantsToLogOut";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProject";
 
@@ -23,7 +22,7 @@ export class NewProjectComponent {
 
   createProject() {
     this.ws.socketConnection.sendDto(new ClientWantsToCreateProject({
-      name: this.form.value.name!,
+      projectname: this.form.value.name!,
       description: this.form.value.description!
       })
     );

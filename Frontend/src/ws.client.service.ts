@@ -8,13 +8,15 @@ import {ServerLogsOutUser} from "./models/serverLogsOutUser";
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
 import {ServerInsertsProject} from "./models/serverInsertsProject";
+import { ServerSendsProjects } from "./models/serverSendsProjects";
+import {DataService} from "./app/data.service";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
 
   public socketConnection: WebsocketSuperclass;
 
-  constructor(public router: Router, public toast: ToastController) {
+  constructor(public router: Router, public toast: ToastController, public dataService: DataService) {
     this.socketConnection = new WebsocketSuperclass(environment.websocketBaseUrl);
     this.handleEventsEmittedByTheServer()
   }
@@ -64,5 +66,10 @@ export class WebSocketClientService {
       position: "top",
     });
     toast.present();
+  }
+
+  ServerSendsProjects(dto: ServerSendsProjects) {
+    this.dataService.projects = dto.ProjectsList;
+    console.log(this.dataService.projects);
   }
 }

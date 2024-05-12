@@ -1,6 +1,6 @@
 import {BaseDto} from "./baseDto";
 
 export class ClientWantsToCreateProject extends BaseDto<ClientWantsToCreateProject>{
-  name?: string;
+  projectname?: string;
   description?: string;
 }

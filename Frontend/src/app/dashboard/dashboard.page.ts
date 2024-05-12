@@ -4,6 +4,8 @@ import {ClientWantsToSignIn} from "../../models/clientWantsToSignIn";
 import {ClientWantsToLogOut} from "../../models/clientWantsToLogOut";
 import {ModalController} from "@ionic/angular";
 import {NewProjectComponent} from "../createNewProject/createNewProject.component";
+import {ClientWantsToGetProjects} from "../../models/clientWantsToGetProjects";
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,9 @@ import {NewProjectComponent} from "../createNewProject/createNewProject.componen
   //styleUrls: ['home.page.scss'],
 })
 export class DashboardPage {
-  constructor(public modalController: ModalController) {}
+  constructor(public modalController: ModalController, public dataService: DataService) {
+    this.getProjects();
+  }
   ws = inject(WebSocketClientService);
 
   LogOut() {
@@ -23,5 +27,9 @@ export class DashboardPage {
       component: NewProjectComponent
       })
     modal.present();
+  }
+
+  getProjects() {
+    this.ws.socketConnection.sendDto(new ClientWantsToGetProjects());
   }
 }

@@ -30,7 +30,7 @@ public class ClientWantsToCreateProject
             socket.SendDto(new ServerInsertsProject
             {
                 ProjectId = project.ProjectId,
-                Name = project.Name,
+                Name = project.ProjectName,
                 CreatedAt = project.CreatedAt,
                 CreatedBy = project.CreatedBy,
                 Description = project.Description,
