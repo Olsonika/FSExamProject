@@ -46,7 +46,7 @@ public class ProjectRepository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirstOrDefault<Project>(sql)
+            return conn.QueryFirstOrDefault<Project>(sql, insertProjectParams)
                    ?? throw new InvalidOperationException("Insertion and retrieval failed");
         }
     }

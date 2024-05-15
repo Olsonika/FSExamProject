@@ -2,6 +2,7 @@ import {Component, inject} from "@angular/core";
 import {WebSocketClientService} from "../../ws.client.service";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProject";
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-new-project',
@@ -10,7 +11,7 @@ import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProjec
 })
 
 export class NewProjectComponent {
-  constructor(public fb:FormBuilder) {
+  constructor(public fb: FormBuilder, public modalController: ModalController) {
   }
 
   form = this.fb.group({
@@ -27,5 +28,6 @@ export class NewProjectComponent {
       description: this.form.value.description!
       })
     );
+    this.modalController.dismiss();
   }
 }

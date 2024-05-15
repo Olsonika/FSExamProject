@@ -20,7 +20,7 @@ public class ClientWantsToGetProjects(ProjectRepository projectRepository) : Bas
         var client = WebSocketStateService.GetClient(socket.ConnectionInfo.Id);
         if (client.IsAuthenticated)
         {
-            IEnumerable<Project> projects = projectRepository.GetAllProjectsForUser(2);
+            IEnumerable<Project> projects = projectRepository.GetAllProjectsForUser(client.User.UserId);
             
             socket.SendDto(new ServerSendsProjects
             {

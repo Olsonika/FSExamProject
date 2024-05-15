@@ -28,8 +28,14 @@ export class WebSocketClientService {
       //@ts-ignore
       this[data.eventType].call(this, data);
     }
-    this.socketConnection.onerror = (err) => {
-      //this.messageService.add( {life: 5000, severity: 'error', summary: '⚠', detail: 'The websocket API is currently not running (only the client app hosted on Firebase id running)'});
+    this.socketConnection.onerror = async (err) => {
+      const toast = await this.toast.create({
+        message: err.message,
+        color: "danger",
+        duration: 2000,
+        position: "top",
+      });
+      toast.present();
     }
   }
 
