@@ -12,6 +12,7 @@ import { ServerSendsProjects } from "./models/serverSendsProjects";
 import {DataService} from "./app/data.service";
 import {ServerDeletesProject} from "./models/serverDeletesProject";
 import {ServerSendsSpecificProject} from "./models/serverSendSpecificProject";
+import { ServerSendsAllTasksForProject } from "./models/serverSendsAllTasksForProject";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
@@ -68,14 +69,14 @@ export class WebSocketClientService {
   }
 
   async ServerSendsErrorMessageToClient(dto: ServerSendsErrorMessageToClient) {
-    console.log(dto.errorMessage);
+    /*console.log(dto.errorMessage);
     const toast = await this.toast.create({
       message: dto.errorMessage,
       color: "danger",
       duration: 2000,
       position: "top",
     });
-    toast.present();
+    toast.present();*/
   }
 
   ServerSendsProjects(dto: ServerSendsProjects) {
@@ -83,10 +84,15 @@ export class WebSocketClientService {
   }
 
   ServerDeletesProject(dto: ServerDeletesProject) {
-    this.dataService.projects.filter(a => a.ProjectId!=dto.projectId)
+    this.dataService.projects.filter(a => a.ProjectId!=dto.projectId!)
   }
 
   ServerSendsSpecificProject(dto: ServerSendsSpecificProject) {
     this.dataService.currentProject = dto.Project!;
+  }
+
+  ServerSendsAllTasksForProject(dto: ServerSendsAllTasksForProject) {
+    this.dataService.tasks = dto.TaskList || [];
+    console.log(dto.TaskList);
   }
 }

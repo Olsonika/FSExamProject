@@ -27,7 +27,8 @@ public class TaskRepository
             t.project_id as {nameof(Task.ProjectId)},
             t.created_at as {nameof(Task.CreatedAt)}
             FROM collabapp.tasks t
-            JOIN collabapp.endusers u ON t.created_by = u.user_id;";
+            JOIN collabapp.endusers u ON t.created_by = u.user_id
+            WHERE t.project_id = @projectId;";
 
         using (var conn = _dataSource.OpenConnection())
         {

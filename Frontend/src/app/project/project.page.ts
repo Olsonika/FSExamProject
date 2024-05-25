@@ -5,16 +5,17 @@ import {ClientWantsToGetProjectById} from "../../models/clientWantsToGetProjectB
 import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProject";
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "../data.service";
+import {ClientWantsAllTasksForProject} from "../../models/clientWantsAllTasksForProject";
 
 @Component({
   selector: 'app-project',
-  templateUrl: 'project.page.html',
-  //styleUrls: ['login-register.page.scss'],
+  templateUrl: 'project.page.html'
 })
 
 export class ProjectPage {
   constructor(private activatedRoute: ActivatedRoute, public dataService: DataService) {
     this.getProject();
+    this.getTasks();
   }
 
   ws = inject(WebSocketClientService);
@@ -30,6 +31,17 @@ export class ProjectPage {
 
       }
     });
+  }
+
+  getTasks() {
+    this.activatedRoute.params.subscribe(async (params) => {
+      const projectId = +params['projectId'];
+      if (projectId) {
+        this.ws.socketConnection.sendDto(new ClientWantsAllTasksForProject({
+          projectId: projectId,
+        }))
+      }
+    })
   }
 }
 

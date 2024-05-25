@@ -4,4 +4,14 @@
     <ion-card-header>{{dataService.currentProject.ProjectName}}</ion-card-header>
     <p>{{dataService.currentProject.Email}}</p>
   </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="4"
+               *ngFor="let task of dataService.tasks">
+        <ion-card>
+          <ion-card-header>{{task?.TaskName}}</ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
