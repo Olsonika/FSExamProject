@@ -10,10 +10,12 @@ import {DashboardPage} from "./dashboard/dashboard.page";
 import {LoginRegisterPage} from "./login-register/login-register.page";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NewProjectComponent} from "./createNewProject/createNewProject.component";
+import {DeleteProjectComponent} from "./deleteProject/deleteProject.component";
+import {ProjectPage} from "./project/project.page";
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardPage, LoginRegisterPage, NewProjectComponent],
+  declarations: [AppComponent, DashboardPage, LoginRegisterPage, NewProjectComponent, DeleteProjectComponent, ProjectPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,5 +1,5 @@
 <ion-content>
-  <h1>Logged In</h1>
+  <h1>Dashboard Page</h1>
   <ion-button (click)="LogOut()">Log Out</ion-button>
   <ion-button (click)="newProject()">New Project</ion-button>
   <ion-grid>
@@ -7,7 +7,10 @@
       <ion-col size="12" size-sm="12" size-md="6" size-lg="4"
                *ngFor="let project of dataService.projects">
         <ion-card>
-          <ion-card-header>{{project.ProjectName}}</ion-card-header>
+          <ion-card-header>{{project?.ProjectName}}</ion-card-header>
+          <p>{{project.Email}}</p>
+          <ion-button (click)="deleteProjectConf(project.ProjectId)">Delete</ion-button>
+          <ion-button (click)="seeDetails(project.ProjectId)">See details</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

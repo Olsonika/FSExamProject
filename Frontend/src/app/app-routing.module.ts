@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {DashboardPage} from "./dashboard/dashboard.page";
 import {LoginRegisterPage} from "./login-register/login-register.page";
+import {ProjectPage} from "./project/project.page";
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path:'login-register',
     component: LoginRegisterPage
+  },
+  {
+    path: 'project/:projectId',
+    component: ProjectPage
   }
 ];
 

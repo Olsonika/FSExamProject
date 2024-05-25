@@ -1,10 +1,12 @@
-import {Injectable} from "@angular/core";
-import {Project} from "../models/models";
+import { Injectable } from "@angular/core";
+import { Project } from "../models/models";
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class DataService {
-  public projects?: Project [] = [];
+  public projects: Project[] = [];
+  public currentProject: Project ={};
+
+  constructor() {}
 }

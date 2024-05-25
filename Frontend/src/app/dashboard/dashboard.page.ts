@@ -6,6 +6,9 @@ import {ModalController} from "@ionic/angular";
 import {NewProjectComponent} from "../createNewProject/createNewProject.component";
 import {ClientWantsToGetProjects} from "../../models/clientWantsToGetProjects";
 import {DataService} from "../data.service";
+import {DeleteProjectComponent} from "../deleteProject/deleteProject.component";
+import {ClientWantsToAuthenticateWithJwt} from "../../models/clientWantsToAuthenticateWithJwt";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +16,10 @@ import {DataService} from "../data.service";
   //styleUrls: ['home.page.scss'],
 })
 export class DashboardPage {
-  constructor(public modalController: ModalController, public dataService: DataService) {
+  constructor(public router: Router, public modalController: ModalController, public dataService: DataService) {
     this.getProjects();
   }
+
   ws = inject(WebSocketClientService);
 
   LogOut() {
@@ -25,11 +29,24 @@ export class DashboardPage {
   async newProject() {
     const modal = await this.modalController.create({
       component: NewProjectComponent
-      })
+    })
     modal.present();
   }
 
   getProjects() {
     this.ws.socketConnection.sendDto(new ClientWantsToGetProjects());
+  }
+
+  async deleteProjectConf(projectId: number | undefined) {
+    const modal = await this.modalController.create({
+      component: DeleteProjectComponent,
+      componentProps: {
+        projectToDelete: projectId
+      },});
+    modal.present();
+  }
+
+  seeDetails(projectId: number | undefined) {
+    this.router.navigate(['project', projectId]);
   }
 }

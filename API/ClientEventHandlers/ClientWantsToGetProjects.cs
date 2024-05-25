@@ -5,6 +5,7 @@ using API.Repositories;
 using Fleck;
 using Infrastructure.Model;
 using lib;
+using Task = System.Threading.Tasks.Task;
 
 namespace API.ClientEventHandlers;
 
@@ -20,7 +21,7 @@ public class ClientWantsToGetProjects(ProjectRepository projectRepository) : Bas
         var client = WebSocketStateService.GetClient(socket.ConnectionInfo.Id);
         if (client.IsAuthenticated)
         {
-            IEnumerable<Project> projects = projectRepository.GetAllProjectsForUser(client.User.UserId);
+            IEnumerable<Project> projects = projectRepository.GetAllProjects();
             
             socket.SendDto(new ServerSendsProjects
             {

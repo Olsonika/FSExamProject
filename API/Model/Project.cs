@@ -7,4 +7,5 @@ public class Project
     public string? Description { get; set; }
     public int CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string? Email { get; set; }
 }

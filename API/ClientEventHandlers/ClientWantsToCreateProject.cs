@@ -1,9 +1,11 @@
 ﻿using System.Security.Authentication;
+using API.Model;
 using API.Model.ParameterModels;
 using API.Model.ServerEvents;
 using API.Repositories;
 using Fleck;
 using lib;
+using Task = System.Threading.Tasks.Task;
 
 namespace API.ClientEventHandlers;
 
@@ -14,8 +16,7 @@ public class ClientWantsToCreateProjectDto : BaseDto
 }
 
 public class ClientWantsToCreateProject(
-    ProjectRepository projectRepository,
-    UsersInProjectRepository usersInProjectRepository) : BaseEventHandler<ClientWantsToCreateProjectDto>
+    ProjectRepository projectRepository) : BaseEventHandler<ClientWantsToCreateProjectDto>
 {
     public override Task Handle(ClientWantsToCreateProjectDto dto, IWebSocketConnection socket)
     {
@@ -24,15 +25,27 @@ public class ClientWantsToCreateProject(
         {
             var insertProjectParams = new InsertProjectParams(dto.ProjectName, dto.Description, client.User.UserId);
             var project = projectRepository.InsertProject(insertProjectParams);
-            usersInProjectRepository.InsertUsersInProject(client.User.UserId, project.ProjectId);
-            socket.SendDto(new ServerInsertsProject
+            
+            var projectWithInfo = new Project
             {
                 ProjectId = project.ProjectId,
-                Name = project.ProjectName,
+                ProjectName = project.ProjectName,
                 CreatedAt = project.CreatedAt,
                 CreatedBy = project.CreatedBy,
                 Description = project.Description,
-            });
+                Email = project.Email
+            };
+            
+            foreach (var connectedClient in WebSocketStateService.GetAllClients())
+            {
+                if (connectedClient.Value.IsAuthenticated)
+                {
+                    connectedClient.Value.Connection.SendDto(new ServerInsertsProject
+                    {
+                        project = projectWithInfo
+                    });
+                }
+            }
         }
         else
         {

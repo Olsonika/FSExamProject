@@ -60,7 +60,7 @@ public static class WebSocketStateService
 
    
 
-    public static void BroadcastMessage<T>(int roomId, T dto) where T : BaseDto
+    public static void BroadcastProject<T>(int roomId, T dto) where T : BaseDto
     {
         if (_roomsToClients.TryGetValue(roomId, out var clients))
             foreach (var clientId in clients)
@@ -81,5 +81,10 @@ public static class WebSocketStateService
         return _clientToRooms.TryGetValue(clientId, out var rooms)
             ? rooms.ToList()
             : new List<int>();
+    }
+    
+    public static Dictionary<Guid, WsWithMetadata> GetAllClients()
+    {
+        return _clients;
     }
 }

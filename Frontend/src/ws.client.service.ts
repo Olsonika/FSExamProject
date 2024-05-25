@@ -10,6 +10,8 @@ import {ToastController} from "@ionic/angular";
 import {ServerInsertsProject} from "./models/serverInsertsProject";
 import { ServerSendsProjects } from "./models/serverSendsProjects";
 import {DataService} from "./app/data.service";
+import {ServerDeletesProject} from "./models/serverDeletesProject";
+import {ServerSendsSpecificProject} from "./models/serverSendSpecificProject";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
@@ -54,6 +56,8 @@ export class WebSocketClientService {
   }
 
   async ServerInsertsProject(dto: ServerInsertsProject) {
+      this.dataService.projects.push(dto.project!);
+
     const toast = await this.toast.create({
       message: "Project created!",
       color: "success",
@@ -75,7 +79,14 @@ export class WebSocketClientService {
   }
 
   ServerSendsProjects(dto: ServerSendsProjects) {
-    this.dataService.projects = dto.ProjectsList;
-    console.log(this.dataService.projects);
+    this.dataService.projects = dto.ProjectsList || [];
+  }
+
+  ServerDeletesProject(dto: ServerDeletesProject) {
+    this.dataService.projects.filter(a => a.ProjectId!=dto.projectId)
+  }
+
+  ServerSendsSpecificProject(dto: ServerSendsSpecificProject) {
+    this.dataService.currentProject = dto.Project!;
   }
 }
