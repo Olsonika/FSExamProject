@@ -16,5 +16,4 @@ export class Task {
   CreatedBy?: string;
   ProjectId?: number;
   CreatedAt?: Date;
-
 }

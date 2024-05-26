@@ -7,7 +7,6 @@ import {Project, Task} from "../models/models";
 export class DataService {
   public projects: Project[] = [];
   public currentProject: Project = {};
-
   public tasks: Task[] = [];
 
   constructor() {}

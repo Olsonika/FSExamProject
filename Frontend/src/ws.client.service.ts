@@ -92,7 +92,7 @@ export class WebSocketClientService {
   }
 
   ServerSendsAllTasksForProject(dto: ServerSendsAllTasksForProject) {
-    this.dataService.tasks = dto.TaskList || [];
-    console.log(dto.TaskList);
+    this.dataService.tasks = dto.TasksList || [];
+    console.log(dto.TasksList);
   }
 }
