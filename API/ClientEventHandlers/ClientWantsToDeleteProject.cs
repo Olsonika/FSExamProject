@@ -23,13 +23,13 @@ public class ClientWantsToDeleteProject(
             
             foreach (var connectedClient in WebSocketStateService.GetAllClients())
             {
-                if (connectedClient.Value.IsAuthenticated)
-                {
+                //if (connectedClient.Value.IsAuthenticated)
+               // {
                     connectedClient.Value.Connection.SendDto(new ServerDeletesProject
                     {
                         ProjectId = dto.ProjectId
                     });
-                }
+               // }
             }
        /* }
         else

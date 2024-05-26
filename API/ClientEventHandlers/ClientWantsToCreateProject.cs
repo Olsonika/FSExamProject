@@ -21,8 +21,8 @@ public class ClientWantsToCreateProject(
     public override Task Handle(ClientWantsToCreateProjectDto dto, IWebSocketConnection socket)
     {
         var client = WebSocketStateService.GetClient(socket.ConnectionInfo.Id);
-        if (client.IsAuthenticated)
-        {
+       // if (client.IsAuthenticated)
+       // {
             var insertProjectParams = new InsertProjectParams(dto.ProjectName, dto.Description, client.User.UserId);
             var project = projectRepository.InsertProject(insertProjectParams);
             
@@ -46,11 +46,11 @@ public class ClientWantsToCreateProject(
                     });
                 }
             }
-        }
-        else
-        {
-            throw new AuthenticationException("User not authenticated!");
-        }
+       // }
+       // else
+       // {
+       //     throw new AuthenticationException("User not authenticated!");
+       //}
 
         return Task.CompletedTask;
     }

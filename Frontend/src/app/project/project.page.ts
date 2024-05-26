@@ -43,5 +43,9 @@ export class ProjectPage {
       }
     })
   }
+
+  newTask() {
+
+  }
 }
 

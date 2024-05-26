@@ -21,6 +21,7 @@ export class DeleteProjectComponent {
     this.ws.socketConnection.sendDto(new ClientWantsToDeleteProject({
       projectId: this.projectToDelete
     }));
+    this.modalController.dismiss();
   }
 
   dismiss() {

@@ -13,6 +13,7 @@ import {DataService} from "./app/data.service";
 import {ServerDeletesProject} from "./models/serverDeletesProject";
 import {ServerSendsSpecificProject} from "./models/serverSendSpecificProject";
 import { ServerSendsAllTasksForProject } from "./models/serverSendsAllTasksForProject";
+import { ServerInsertsTask } from "./models/serverInsertsTask";
 
 @Injectable({providedIn: 'root'})
 export class WebSocketClientService {
@@ -69,14 +70,14 @@ export class WebSocketClientService {
   }
 
   async ServerSendsErrorMessageToClient(dto: ServerSendsErrorMessageToClient) {
-    /*console.log(dto.errorMessage);
+    console.log(dto.ErrorMessage);
     const toast = await this.toast.create({
-      message: dto.errorMessage,
+      message: dto.ErrorMessage,
       color: "danger",
       duration: 2000,
       position: "top",
     });
-    toast.present();*/
+    toast.present();
   }
 
   ServerSendsProjects(dto: ServerSendsProjects) {
@@ -84,7 +85,8 @@ export class WebSocketClientService {
   }
 
   ServerDeletesProject(dto: ServerDeletesProject) {
-    this.dataService.projects.filter(a => a.ProjectId!=dto.projectId!)
+    console.log(dto.ProjectId);
+    this.dataService.projects = this.dataService.projects.filter(a => a.ProjectId !== dto.ProjectId);
   }
 
   ServerSendsSpecificProject(dto: ServerSendsSpecificProject) {
@@ -94,5 +96,9 @@ export class WebSocketClientService {
   ServerSendsAllTasksForProject(dto: ServerSendsAllTasksForProject) {
     this.dataService.tasks = dto.TasksList || [];
     console.log(dto.TasksList);
+  }
+
+  ServerInsertsTask(dto: ServerInsertsTask) {
+    this.dataService.tasks.push(dto.task!);
   }
 }
