@@ -4,5 +4,5 @@ export class ClientWantsToCreateTask extends BaseDto<ClientWantsToCreateTask> {
 taskName?: string;
 description?: string;
 dueDate?: Date;
-projectId?: string;
+projectId?: number;
 }

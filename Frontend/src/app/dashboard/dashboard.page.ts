@@ -1,35 +1,49 @@
-import {Component, inject} from "@angular/core";
-import {WebSocketClientService} from "../../ws.client.service";
-import {ClientWantsToSignIn} from "../../models/clientWantsToSignIn";
-import {ClientWantsToLogOut} from "../../models/clientWantsToLogOut";
-import {ModalController} from "@ionic/angular";
-import {NewProjectComponent} from "../createNewProject/createNewProject.component";
-import {ClientWantsToGetProjects} from "../../models/clientWantsToGetProjects";
-import {DataService} from "../data.service";
-import {DeleteProjectComponent} from "../deleteProject/deleteProject.component";
-import {ClientWantsToAuthenticateWithJwt} from "../../models/clientWantsToAuthenticateWithJwt";
-import {Router} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { WebSocketClientService } from "../../ws.client.service";
+import { ClientWantsToLogOut } from "../../models/clientWantsToLogOut";
+import { ModalController } from "@ionic/angular";
+import { NewProjectComponent } from "../createNewProject/createNewProject.component";
+import { ClientWantsToGetProjects } from "../../models/clientWantsToGetProjects";
+import { DataService } from "../data.service";
+import { DeleteProjectComponent } from "../deleteProject/deleteProject.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.page.html',
   //styleUrls: ['home.page.scss'],
 })
-export class DashboardPage {
-  constructor(public router: Router, public modalController: ModalController, public dataService: DataService) {
+export class DashboardPage implements OnInit {
+  isAuthenticated: boolean = false;
+
+  constructor(
+    public router: Router,
+    public modalController: ModalController,
+    public dataService: DataService,
+    private ws: WebSocketClientService
+  ) {
     this.getProjects();
   }
 
-  ws = inject(WebSocketClientService);
+  ngOnInit() {
+    this.ws.authenticationStatus$.subscribe(status => {
+      this.isAuthenticated = status;
+    });
+
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      this.ws.authenticateWithJwt(jwt);
+    }
+  }
 
   LogOut() {
-    this.ws.socketConnection.sendDto(new ClientWantsToLogOut());
+    this.ws.logout();
   }
 
   async newProject() {
     const modal = await this.modalController.create({
       component: NewProjectComponent
-    })
+    });
     modal.present();
   }
 
@@ -42,7 +56,8 @@ export class DashboardPage {
       component: DeleteProjectComponent,
       componentProps: {
         projectToDelete: projectId
-      },});
+      },
+    });
     modal.present();
   }
 

@@ -6,6 +6,9 @@ import {ClientWantsToCreateProject} from "../../models/clientWantsToCreateProjec
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "../data.service";
 import {ClientWantsAllTasksForProject} from "../../models/clientWantsAllTasksForProject";
+import {DeleteProjectComponent} from "../deleteProject/deleteProject.component";
+import {ModalController} from "@ionic/angular";
+import {NewTaskComponent} from "../createNewTask/createNewTask.component";
 
 @Component({
   selector: 'app-project',
@@ -13,7 +16,7 @@ import {ClientWantsAllTasksForProject} from "../../models/clientWantsAllTasksFor
 })
 
 export class ProjectPage {
-  constructor(private activatedRoute: ActivatedRoute, public dataService: DataService) {
+  constructor(private activatedRoute: ActivatedRoute, public dataService: DataService, public modalController: ModalController) {
     this.getProject();
     this.getTasks();
   }
@@ -44,8 +47,19 @@ export class ProjectPage {
     })
   }
 
-  newTask() {
-
+  async newTask() {
+    this.activatedRoute.params.subscribe(async (params) => {
+      const projectId = +params['projectId'];
+      if (projectId) {
+        const modal = await this.modalController.create({
+          component: NewTaskComponent,
+          componentProps: {
+            projectId: projectId
+          },
+        });
+        modal.present();
+      }
+    })
   }
 }
 

@@ -19,19 +19,19 @@ public class ClientWantsToGetProjects(ProjectRepository projectRepository) : Bas
     public override Task Handle(ClientWantsToGetProjectsDto dto, IWebSocketConnection socket)
     {
         var client = WebSocketStateService.GetClient(socket.ConnectionInfo.Id);
-       // if (client.IsAuthenticated)
-       // {
+        if (client.IsAuthenticated)
+        {
             IEnumerable<Project> projects = projectRepository.GetAllProjects();
             
             socket.SendDto(new ServerSendsProjects
             {
                 ProjectsList = projects
             });
-      //  }
-       // else
-      //  {
-      //      throw new AuthenticationException("User not authenticated!");
-      //  }
+        }
+        else
+       {
+            throw new AuthenticationException("User not authenticated!");
+        }
         return Task.CompletedTask;
     }
 }

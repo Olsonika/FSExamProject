@@ -1,4 +1,5 @@
-﻿using API.Model.ParameterModels;
+﻿using System.Security.Authentication;
+using API.Model.ParameterModels;
 using API.Model.ServerEvents;
 using API.Repositories;
 using Fleck;
@@ -20,39 +21,40 @@ public class ClientWantsToCreateTask(
     public override Task Handle(ClientWantsToCreateTaskDto dto, IWebSocketConnection socket)
     {
         var client = WebSocketStateService.GetClient(socket.ConnectionInfo.Id);
-        
-        // if (client.IsAuthenticated)
-        // {
-        var insertTaskParams = new InsertTaskParams(dto.TaskName, dto.Description, dto.DueDate, dto.ProjectId, client.User.UserId);
-        var task = taskRepository.InsertTask(insertTaskParams);
 
-        var taskWithInfo = new Model.Task
+        if (client.IsAuthenticated)
         {
-            TaskId = task.TaskId,
-            TaskName = task.TaskName,
-            Description = task.Description,
-            DueDate = task.DueDate,
-            Status = task.Status,
-            CreatedBy = task.CreatedBy,
-            ProjectId = task.ProjectId,
-            CreatedAt = task.CreatedAt
-        };
-        
-        foreach (var connectedClient in WebSocketStateService.GetAllClients())
-        {
-            if (connectedClient.Value.IsAuthenticated)
+            var insertTaskParams = new InsertTaskParams(dto.TaskName, dto.Description, dto.DueDate, dto.ProjectId,
+                client.User.UserId);
+            var task = taskRepository.InsertTask(insertTaskParams);
+
+            var taskWithInfo = new Model.Task
             {
-                connectedClient.Value.Connection.SendDto(new ServerInsertsTask
+                TaskId = task.TaskId,
+                TaskName = task.TaskName,
+                Description = task.Description,
+                DueDate = task.DueDate,
+                Status = task.Status,
+                CreatedBy = task.CreatedBy,
+                ProjectId = task.ProjectId,
+                CreatedAt = task.CreatedAt
+            };
+
+            foreach (var connectedClient in WebSocketStateService.GetAllClients())
+            {
+                if (connectedClient.Value.IsAuthenticated)
                 {
-                    task = taskWithInfo
-                });
+                    connectedClient.Value.Connection.SendDto(new ServerInsertsTask
+                    {
+                        task = taskWithInfo
+                    });
+                }
             }
         }
-        // }
-        // else
-        // {
-        //     throw new AuthenticationException("User not authenticated!");
-        //}
+        else
+        {
+            throw new AuthenticationException("User not authenticated!");
+        }
 
         return Task.CompletedTask;
     }
