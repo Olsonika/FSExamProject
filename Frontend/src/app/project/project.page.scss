@@ -1,0 +1,83 @@
+ion-content {
+  --background: #f0f8ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-top: 7vh;
+}
+
+ion-card {
+  --background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+ion-card-header {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+ion-card p {
+  font-size: 1em;
+  color: #888888;
+  margin-bottom: 10px;
+}
+
+ion-grid {
+  width: 100%;
+  max-width: 1200px;
+}
+
+ion-row {
+  justify-content: center;
+}
+
+ion-col {
+  margin-bottom: 20px;
+}
+
+ion-col ion-card {
+  --background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+ion-col ion-card-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+ion-button {
+  --background: #4CAF50;
+  --background-activated: #45a049;
+  --background-focused: #45a049;
+  --border-radius: 5px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --color: white;
+  font-size: 1.2em;
+  transition: transform 0.2s;
+  margin: 10px 5px;
+}
+
+ion-button:hover {
+  transform: scale(1.05);
+}

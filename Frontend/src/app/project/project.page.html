@@ -2,7 +2,8 @@
   <h1>Project Page</h1>
   <ion-card>
     <ion-card-header>{{dataService.currentProject.ProjectName}}</ion-card-header>
-    <p>{{dataService.currentProject.Email}}</p>
+    <p>Created by: {{dataService.currentProject.Email}}</p>
+    <p>{{dataService.currentProject.Description}}</p>
   </ion-card>
   <ion-grid>
     <ion-row>
@@ -10,6 +11,9 @@
                *ngFor="let task of dataService.tasks">
         <ion-card>
           <ion-card-header>{{task?.TaskName}}</ion-card-header>
+          <p>Description: {{task?.Description}}</p>
+          <p>Due date: {{task?.DueDate}}</p>
+          <p>Status: {{task?.Status}}</p>
         </ion-card>
       </ion-col>
     </ion-row>

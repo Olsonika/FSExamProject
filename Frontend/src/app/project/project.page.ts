@@ -12,7 +12,8 @@ import {NewTaskComponent} from "../createNewTask/createNewTask.component";
 
 @Component({
   selector: 'app-project',
-  templateUrl: 'project.page.html'
+  templateUrl: 'project.page.html',
+  styleUrls: ['project.page.scss'],
 })
 
 export class ProjectPage {

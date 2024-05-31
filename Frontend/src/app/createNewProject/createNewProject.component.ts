@@ -7,7 +7,7 @@ import {ModalController} from "@ionic/angular";
 @Component({
   selector: 'app-new-project',
   templateUrl: 'createNewProject.component.html',
-  //styleUrls: ['home.page.scss'],
+  styleUrls: ['createNewProject.component.scss'],
 })
 
 export class NewProjectComponent {

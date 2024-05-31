@@ -7,7 +7,7 @@ import {ModalController, NavParams} from "@ionic/angular";
 @Component({
   selector: 'app-new-task',
   templateUrl: 'createNewTask.component.html',
-  //styleUrls: ['home.page.scss'],
+  styleUrls: ['createNewTask.component.scss'],
 })
 export class NewTaskComponent  implements OnInit{
   dateTime: any;

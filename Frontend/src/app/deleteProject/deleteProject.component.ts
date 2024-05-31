@@ -8,6 +8,7 @@ import {ClientWantsToDeleteProject} from "../../models/clientWantsToDeleteProjec
 @Component({
   selector: 'app-delete-project',
   templateUrl: 'deleteProject.component.html',
+  styleUrls: ['deleteProject.component.scss']
 })
 
 export class DeleteProjectComponent {

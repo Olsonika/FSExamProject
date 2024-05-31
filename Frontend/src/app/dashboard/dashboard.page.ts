@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.page.html',
-  //styleUrls: ['home.page.scss'],
+  styleUrls: ['dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
   isAuthenticated: boolean = false;

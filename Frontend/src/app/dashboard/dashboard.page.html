@@ -9,8 +9,8 @@
         <ion-card>
           <ion-card-header>{{project?.ProjectName}}</ion-card-header>
           <p>{{project.Email}}</p>
-          <ion-button (click)="deleteProjectConf(project.ProjectId)">Delete</ion-button>
-          <ion-button (click)="seeDetails(project.ProjectId)">See details</ion-button>
+          <ion-button  class="delete" (click)="deleteProjectConf(project.ProjectId)">Delete</ion-button>
+          <ion-button class="details" (click)="seeDetails(project.ProjectId)">See details</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
