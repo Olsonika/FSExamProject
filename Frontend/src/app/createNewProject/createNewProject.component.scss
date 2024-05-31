@@ -7,7 +7,6 @@ ion-content {
   padding: 20px;
 }
 
-/* Center the form and style it */
 form {
   background: #ffffff;
   padding: 20px;
@@ -17,7 +16,6 @@ form {
   max-width: 600px;
 }
 
-/* Style the ion-list and its children */
 ion-list {
   width: 100%;
   margin-bottom: 20px;
@@ -45,7 +43,6 @@ ion-textarea {
   --border-radius: 5px;
 }
 
-/* Style the ion-button */
 ion-button {
   --background: #4CAF50;
   --background-activated: #45a049;
@@ -65,7 +62,6 @@ ion-button:hover {
   transform: scale(1.05);
 }
 
-/* Additional button styles for disabled state */
 ion-button:disabled {
   --background: #cccccc;
   cursor: not-allowed;
